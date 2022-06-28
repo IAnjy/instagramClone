@@ -13,16 +13,17 @@ class AuthMethods {
 
   Future<model.User> getUserDetails() async {
     User currentUser = _auth.currentUser!;
-
+    // print("io :" + currentUser.uid);
     DocumentSnapshot snap =
         await _firestore.collection('users').doc(currentUser.uid).get();
-
+    var zavtra = model.User.fromSnap(snap);
+    // print(zavtra.username);
     // mba tsy anaovana an'izao inbobaka rehefa mila user de nanao fonction any anaty model
     // return model.User(
     //   followers: (snap.data() as Map<String, dynamic>)['followers']
     // );
 
-    return model.User.fromSnap(snap);
+    return zavtra;
   }
 
   //sign up user
